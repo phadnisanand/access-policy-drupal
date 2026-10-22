@@ -1,0 +1,5 @@
+name: Security Assessment Access Policy
+type: module
+description: Revokes configured node create and edit permissions until a user completes a security assessment.
+package: Custom
+core_version_requirement: ^10.3 || ^11

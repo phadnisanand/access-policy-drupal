@@ -1,0 +1,5 @@
+services:
+  security_assessment.access_policy:
+    class: Drupal\security_assessment\Access\SecurityAssessmentAccessPolicy
+    tags:
+      - { name: access_policy }
