@@ -1,0 +1,23 @@
+<?php
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_node_access().
+ */
+function test_access_policy_node_access(NodeInterface $node, $operation, AccountInterface $account): AccessResultInterface {
+  if ($node->getType() == 'recipe') {
+    // Get the access policy for the given scope and identifier.
+    $item = \Drupal::service('access_policy_processor')
+      ->processAccessPolicies($account, 'recipe') // Gets all access policies in the 'recipe' scope.
+      ->getItem('recipe', $node->language()->getId()); // Scope = 'recipe', Identifier = language of the node.
+
+    if ($item && $item->hasPermission('edit any recipe content')) {
+      return AccessResult::allowed();
+    }
+  }
+  return AccessResult::forbidden();
+}

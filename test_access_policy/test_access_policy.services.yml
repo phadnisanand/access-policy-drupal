@@ -1,0 +1,18 @@
+services:
+  access_check.test_access_policy.user_timezone:
+    class: Drupal\test_access_policy\Access\UserTimeZoneAccessPolicy
+    tags:
+      - { name: access_policy }
+  access_check.test_access_policy.user_mail:
+    class: Drupal\test_access_policy\Access\UserEmailDomainAccessPolicy
+    tags:
+      - { name: access_policy }
+  access_check.test_access_policy.recipe:
+    class: Drupal\test_access_policy\Access\RecipeAccessPolicy
+    tags:
+      - { name: access_policy }
+  cache_context.is_user_mail_valid:
+    class: Drupal\test_access_policy\Cache\Context\IsUserMailValidCacheContext
+    arguments: ['@current_user']
+    tags:
+      - { name: cache.context}
